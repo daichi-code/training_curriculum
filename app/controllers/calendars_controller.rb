@@ -15,7 +15,7 @@ class CalendarsController < ApplicationController
   private
 
   def plan_params
-    params.permit(:date, :plan)
+    params.require(:plans).permit(:date, :plan)
   end
 
   def get_week
@@ -34,23 +34,18 @@ class CalendarsController < ApplicationController
       plan = plans.map do |plan|
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
-<<<<<<< HEAD
       wday_num = Date.today.wday + x #Date.today.wdayを利用して添字となる数値を得る
       #もしもwday_numが7以上であれば、7を引く
       if #条件式を記述
         wday_num = wday_num - 7
       end
       #binding.pryでtoday_plansの中身確認してみる*７回止まります
-      days = { month: (@todays_date + x).month, date: (@todays_date+x).day, plans: today_plans, wday: wdays[wday_num]}
+      days = { month: (@todays_date + x).month, date: (@todays_date + x).day, plans: today_plans, wday: wdays[wday_num]}
       #monthとdayのメソッドの動きを検索する
       #binding.pryでdaysの中身確認してみる*７回止まります
-=======
-      days = { month: (@todays_date + x).month, date: (@todays_date+x).day, plans: today_plans, wday: wdays}
-      days = {month: (@todays_date + x).month, date: (@todays_date+x).day, plans: today_plans}
->>>>>>> f3a9e11b42f000039d70273a5e07050619d77919
       @week_days.push(days)
       end
     end
   end
-
+end
 #曜日を出力したい！曜日は３８行目の一文のところで呼び出そうとしてる。
